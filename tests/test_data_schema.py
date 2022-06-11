@@ -1,8 +1,4 @@
-import pytest
 import tensorflow_data_validation as tfdv
-from os import listdir
-from os.path import join
-from pathlib import Path
 
 REFRESH_SCHEMAS = False
 

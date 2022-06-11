@@ -33,6 +33,7 @@ def data_folder(root_folder):
 def test_folder(root_folder):
     yield root_folder / "tests"
 
+
 def pytest_generate_tests(metafunc):
     root = Path().absolute()
     if "test" in root.parts[-1]:
