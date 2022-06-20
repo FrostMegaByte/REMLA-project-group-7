@@ -8,6 +8,8 @@ any file named `conftest.py` and there are more ways to "discover" fixtures.
 
 @author hielke
 """
+from os import listdir
+from os.path import join
 from pathlib import Path
 
 import pytest
@@ -22,7 +24,7 @@ def root_folder():
     return cwd
 
 
-@pytest.fixture()
+@pytest.fixture(autouse=True)
 def data_folder(root_folder):
     yield root_folder / "data"
 
@@ -30,3 +32,17 @@ def data_folder(root_folder):
 @pytest.fixture()
 def test_folder(root_folder):
     yield root_folder / "tests"
+
+
+def pytest_generate_tests(metafunc):
+    root = Path().absolute()
+    if "test" in root.parts[-1]:
+        root = root.parent
+
+    if 'data_step' in metafunc.fixturenames and 'data_set' in metafunc.fixturenames:
+        params = []
+        for step in ['raw', 'interim']:
+            for filename in listdir(join(root, 'data', step)):
+                if '.tsv' in filename:
+                    params.append((step, filename[:-4]))
+        metafunc.parametrize('data_step, data_set', params)

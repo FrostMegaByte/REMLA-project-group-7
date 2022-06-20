@@ -1,21 +1,8 @@
-import pickle
-
-import pandas as pd
-import pytest
 import tensorflow_data_validation as tfdv
 
-REFRESH_SCHEMAS = True
+REFRESH_SCHEMAS = False
 
 
-@pytest.mark.parametrize(
-    "data_step, data_set",
-    [
-        # ('raw', 'test'),       ('raw', 'train'),       ('raw', 'validation'),
-        ("interim", "test"),
-        ("interim", "train"),
-        ("interim", "validation"),
-    ],
-)
 def test_schema(data_folder, test_folder, data_step, data_set):
     """test schema"""
     data_path = data_folder / "{}/{}.tsv".format(data_step, data_set)
