@@ -54,7 +54,11 @@ async def metrics(model_name: ModelName):
 async def all_metrics_prometheus():
     evaluator = Evaluator()
     texts = [evaluator.evaluate_prometheus(model_name) for model_name in model_names]
-    return "\n".join(chain(texts))
+    all_lines = []
+    for text in texts:
+        for line in text:
+            all_lines.append(line)
+    return "\n".join(all_lines)
 
 
 @app.get("/metrics-prometheus/{model_name}", response_class=PlainTextResponse)
