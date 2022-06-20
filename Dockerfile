@@ -31,7 +31,7 @@ ENV GIT_HASH=$GIT_HASH
 LABEL git_hash=$GIT_HASH
 
 COPY . .
-RUN mkdir .dvc/tmp
+RUN mkdir -p .dvc/tmp
 RUN mv gdrive-creds.json .dvc/tmp/gdrive-user-credentials.json
 
 RUN poetry install  # With the code copied, install the root package.
