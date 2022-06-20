@@ -81,7 +81,7 @@ class Evaluator:
         text = []
         values = self.evaluate(model)
         for value_name, help in self.evaluation_metrics.items():
-            name = f"{model}.{value_name}"
+            name = f"{model}:{value_name}".replace("-", "_")
             text.append(f"# HELP {name} {help}")
             text.append(f"# TYPE {name} gauge")
             text.append(f"{name} {values[value_name]}")
