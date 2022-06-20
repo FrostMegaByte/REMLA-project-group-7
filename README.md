@@ -1,4 +1,4 @@
-# Release engeneering of Multilabel classification on Stack Overflow tags
+# Release engineering of Multilabel classification on Stack Overflow tags
 
 This project designs a Release pipeline for a multilabel classifying ML applications. The application is an extended version of [the forked project](https://github.com/luiscruz/remla-baseline-project/blob/main/README.md). The team working on this project has applied the following changes to improve the development of the ML applications:
 
