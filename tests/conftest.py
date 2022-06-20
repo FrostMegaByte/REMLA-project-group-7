@@ -39,11 +39,10 @@ def pytest_generate_tests(metafunc):
     if "test" in root.parts[-1]:
         root = root.parent
 
-    params = []
-    for step in ['raw', 'interim']:
-        for filename in listdir(join(root, 'data', step)):
-            if '.tsv' in filename:
-                params.append((step, filename[:-4]))
-
     if 'data_step' in metafunc.fixturenames and 'data_set' in metafunc.fixturenames:
+        params = []
+        for step in ['raw', 'interim']:
+            for filename in listdir(join(root, 'data', step)):
+                if '.tsv' in filename:
+                    params.append((step, filename[:-4]))
         metafunc.parametrize('data_step, data_set', params)
