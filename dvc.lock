@@ -13,13 +13,13 @@ stages:
     outs:
     - path: data/interim/test.tsv
       md5: 100ec4e0cd942631d1a558bbd415e1a6
-      size: 1433
+      size: 1464
     - path: data/interim/train.tsv
       md5: 0458fd0c92d3c6077eeec0eeab9dced4
-      size: 2096812
+      size: 2128237
     - path: data/interim/validation.tsv
       md5: 8e84348adebbdad8ce4efb128a255582
-      size: 68147
+      size: 69191
   extract_features:
     cmd: python src/features/build_features.py
     deps:
@@ -55,14 +55,14 @@ stages:
       md5: 999be91f922fb33867957752251dbfbd
       size: 68068
     - path: data/processed/mlb.pickle
-      md5: 7eb3a94349cd226ac41a7c769be5b3ea
-      size: 1880
+      md5: f2a06a396bfc02dbbf4d3b8acd05fdb3
+      size: 1881
     - path: data/processed/mlb_train.pickle
-      md5: a8f394fc7b46e4a2d7bbd87a8b8d8f4e
-      size: 25139362
+      md5: 1e9270518b794d8704e89fe68206255a
+      size: 12569762
     - path: data/processed/mlb_val.pickle
-      md5: d75e004203e5ac04ec525f7dcfbf4365
-      size: 834562
+      md5: 602ed2196b0e6cf80dd8f55bf04c823f
+      size: 417362
     - path: data/processed/tfidf_test.pickle
       md5: 73c3c697505a8b6c3df5f1b859016bc5
       size: 2533
