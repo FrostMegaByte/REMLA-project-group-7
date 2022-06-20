@@ -21,6 +21,9 @@ This project designs a Release pipeline for a multilabel classifying ML applicat
 
 ## Local (with `venv` as virtual environemnt)
 
+This application can only run on Python 3.9. You might run into problems 
+with installing dependencies (on 3.10), or with compatibilities problems with pickled data (3.8 and lower).
+
 ```
 python -m venv ./venv
 . ./venv/bin/activate
