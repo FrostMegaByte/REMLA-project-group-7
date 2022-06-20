@@ -43,13 +43,13 @@ def main():
 
 class Evaluator:
 
-    evaluation_metrics = [
-        "accuracy",
-        "recall",
-        "f1-score",
-        "average-precision-score",
-        "roc-score",
-    ]
+    evaluation_metrics = {
+        "accuracy": "Accuracy score",
+        "recall": "Recall score",
+        "f1-score": "F1 score",
+        "average-precision-score": "Average Precision Score",
+        "roc-score": "ROC score",
+    }
 
     def __init__(self):
         self.mlb_y_val = validation_file(ModelName.mlb)
@@ -76,6 +76,18 @@ class Evaluator:
                 self.mlb_y_val, y_val_predicted_scores, multi_class="ovo"
             ),
         }
+
+    def evaluate_prometheus(self, model: ModelName) -> List[str]:
+        text = []
+        values = self.evaluate(model)
+        for value_name, help in self.evaluation_metrics.items():
+            name = f"{model}:{value_name}".replace("-", "_")
+            text.append(f"# HELP {name} {help}")
+            text.append(f"# TYPE {name} gauge")
+            text.append(f"{name} {values[value_name]}")
+            text.append("")
+
+        return text
 
 
 default_format = "{:.2f}"
