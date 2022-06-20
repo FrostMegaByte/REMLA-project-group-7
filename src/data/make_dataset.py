@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 import logging
-import os
 import re
-from ast import literal_eval
 from os import listdir
 from os.path import isfile, join
-from pathlib import Path
 
-import click
 import nltk
 import pandas as pd
 from nltk.corpus import stopwords
