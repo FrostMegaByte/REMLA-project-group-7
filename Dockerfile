@@ -1,5 +1,5 @@
 # https://www.pybootcamp.com/blog/how-to-write-dockerfile-python-apps/
-FROM python:3.7.10-slim
+FROM python:3.9.12-slim
 
 WORKDIR /root/
 
@@ -31,6 +31,9 @@ ENV GIT_HASH=$GIT_HASH
 LABEL git_hash=$GIT_HASH
 
 COPY . .
+RUN mkdir .dvc/tmp
+RUN mv gdrive-creds.json .dvc/tmp/gdrive-user-credentials.json
+
 RUN poetry install  # With the code copied, install the root package.
 RUN poetry run dvc pull
 
