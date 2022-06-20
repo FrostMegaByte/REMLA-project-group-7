@@ -6,11 +6,12 @@
 
 import os
 import pickle
+from itertools import chain
 from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI, UploadFile, status
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse
 from pydantic import BaseModel
 
 from src.data.make_dataset import text_prepare
@@ -34,19 +35,32 @@ async def root():
     return HTMLResponse(content="<p>Hello, World!</p>")
 
 
+model_names = [ModelName.bow, ModelName.tfidf]
+
+
 @app.get("/metrics/")
 async def all_metrics():
     evaluator = Evaluator()
-    return {
-        model_name: evaluator.evaluate(model_name)
-        for model_name in [ModelName.bow, ModelName.tfidf]
-    }
+    return {model_name: evaluator.evaluate(model_name) for model_name in model_names}
 
 
 @app.get("/metrics/{model_name}")
 async def metrics(model_name: ModelName):
     evaluator = Evaluator()
     return {model_name: evaluator.evaluate(model_name)}
+
+
+@app.get("/metrics-prometheus/", response_class=PlainTextResponse)
+async def all_metrics_prometheus():
+    evaluator = Evaluator()
+    texts = [evaluator.evaluate_prometheus(model_name) for model_name in model_names]
+    return "\n".join(chain(texts))
+
+
+@app.get("/metrics-prometheus/{model_name}", response_class=PlainTextResponse)
+async def metrics_prometheus(model_name: ModelName):
+    evaluator = Evaluator()
+    return "\n".join(evaluator.evaluate_prometheus(model_name))
 
 
 @app.post("/predict/{model_name}")
