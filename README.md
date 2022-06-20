@@ -42,6 +42,9 @@ PATH=/root/.local/bin/:$PATH
 You can now install all the dependencies.
 
 
+This application can only run on Python 3.9. You might run into problems 
+with installing dependencies (on 3.10), or with compatibilities problems with pickled data (3.8 and lower).
+
 ```
 poetry shell
 poetry install
