@@ -15,10 +15,6 @@ This project designs a Release pipeline for a multilabel classifying ML applicat
  * This includes configuration to monitor it with Grafana.
 
 
-NB. mllint is currently disabled on the CI because of the following bug:
-
-https://github.com/bvobart/mllint/issues/35
-
 # Table of Content
 
 1. [Installation](#installation)
