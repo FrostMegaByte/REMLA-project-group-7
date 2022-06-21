@@ -38,19 +38,19 @@ async def root():
 model_names = [ModelName.bow, ModelName.tfidf]
 
 
-@app.get("/metrics/")
+@app.get("/metrics-json/")
 async def all_metrics():
     evaluator = Evaluator()
     return {model_name: evaluator.evaluate(model_name) for model_name in model_names}
 
 
-@app.get("/metrics/{model_name}")
+@app.get("/metrics-json/{model_name}")
 async def metrics(model_name: ModelName):
     evaluator = Evaluator()
     return {model_name: evaluator.evaluate(model_name)}
 
 
-@app.get("/metrics-prometheus/", response_class=PlainTextResponse)
+@app.get("/metrics/", response_class=PlainTextResponse)
 async def all_metrics_prometheus():
     evaluator = Evaluator()
     texts = [evaluator.evaluate_prometheus(model_name) for model_name in model_names]
@@ -61,7 +61,7 @@ async def all_metrics_prometheus():
     return "\n".join(all_lines)
 
 
-@app.get("/metrics-prometheus/{model_name}", response_class=PlainTextResponse)
+@app.get("/metrics/{model_name}", response_class=PlainTextResponse)
 async def metrics_prometheus(model_name: ModelName):
     evaluator = Evaluator()
     return "\n".join(evaluator.evaluate_prometheus(model_name))
