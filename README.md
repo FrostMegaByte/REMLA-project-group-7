@@ -42,7 +42,7 @@ PATH=/root/.local/bin/:$PATH
 You can now install all the dependencies.
 
 
-This application can only run on Python 3.9. You might run into problems 
+This application can only run on Python 3.9. You might run into problems
 with installing dependencies (on 3.10), or with compatibilities problems with pickled data (3.8 and lower).
 
 ```
@@ -168,6 +168,9 @@ kubectl port-forward promstack-grafana-[hash] 3000 # --> Grafana on localhost:30
 Log in on Grafana with the following credentials:
 Username: `admin`
 Password: `prom-operator`
+
+There is a `grafana.json` file that provides a dashboard that can be loaded
+to view the metrics provided by our model.
 
 # Run release pipeline
 
