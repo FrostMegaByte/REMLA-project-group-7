@@ -49,7 +49,7 @@ spec:
       app: group7-service # Should match the label of our service
   endpoints:
     - targetPort: 5000 # Should match the port our pods with `/metrics` endpoint are running on
-      path: "/metrics-prometheus/"
+      path: "/metrics/"
       interval: 1s
 ---
 # Ingress
