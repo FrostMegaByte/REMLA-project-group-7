@@ -14,5 +14,5 @@ client = TestClient(app)
 
 
 def test_read_main():
-    response = client.get("/metrics-prometheus")
+    response = client.get("/metrics/")
     assert response.status_code == 200
