@@ -5,7 +5,7 @@ on: push
 
 jobs:
   build:
-    name: Run linters  and tests
+    name: Build project
     runs-on: ubuntu-20.04
     steps:
       - name: Clone project
@@ -50,6 +50,11 @@ jobs:
           mv gdrive-creds.json .dvc/tmp/gdrive-user-credentials.json
           poetry run dvc pull
 
+  test:
+    name: Run linters  and tests
+    needs: build
+    runs-on: ubuntu-20.04
+    steps:
       - name: Run mllint
         run:
           poetry run mllint -o mllint-report.md
